@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust-slave
+  labels:
+    app: locust-slave
+spec:
+  replicas: 3  # スレーブの数を調整
+  selector:
+    matchLabels:
+      app: locust-slave
+  template:
+    metadata:
+      labels:
+        app: locust-slave
+    spec:
+      containers:
+      - name: locust-slave
+        image: hajimeteno-locust:latest
+        imagePullPolicy: Never
+        args: ["uv", "run", "locust", "-f", "src/main.py", "--worker", "--master-host=locust-master.locust.svc.cluster.local", "--host", "grpc-service.default.svc.cluster.local:50051"]
+        env:
+        - name: GRPC_HOST
+          value: "grpc-service.default.svc.cluster.local"
+        - name: GRPC_PORT
+          value: "50051"
+

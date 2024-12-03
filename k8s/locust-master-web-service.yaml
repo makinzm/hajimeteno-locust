@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: locust-master-web
+spec:
+  type: NodePort
+  ports:
+  - port: 8089
+    targetPort: 8089
+    nodePort: 30090  # 30000-32767 の範囲内で未使用ポートを選択
+  selector:
+    app: locust-master

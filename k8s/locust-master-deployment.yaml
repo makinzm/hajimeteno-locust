@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust-master
+  labels:
+    app: locust-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust-master
+  template:
+    metadata:
+      labels:
+        app: locust-master
+    spec:
+      containers:
+      - name: locust-master
+        image: hajimeteno-locust:latest
+        imagePullPolicy: Never
+        args: ["uv", "run", "locust", "-f", "src/main.py", "--master", "--host", "grpc-service.default.svc.cluster.local:50051"]
+        ports:
+        - containerPort: 8089
+        env:
+        - name: GRPC_HOST
+          value: "grpc-service.default.svc.cluster.local"
+        - name: GRPC_PORT
+          value: "50051"
+
