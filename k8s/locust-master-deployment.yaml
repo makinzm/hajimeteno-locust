@@ -21,6 +21,7 @@ spec:
         args: ["uv", "run", "locust", "-f", "src/main.py", "--master", "--host", "grpc-service.hajimeteno-locust-ns.svc.cluster.local:50051"]
         ports:
         - containerPort: 8089
+        - containerPort: 5557
         env:
         - name: GRPC_HOST
           value: "grpc-service.hajimeteno-locust-ns.svc.cluster.local"
