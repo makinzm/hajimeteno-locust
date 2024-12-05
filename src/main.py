@@ -8,7 +8,7 @@ class GRPCUser(User):
 
     def on_start(self):
         # gRPC サーバーのアドレスを設定
-        self.channel = grpc.insecure_channel("grpc-service.hajimeteno-locust-ns.svc.cluster.local:50051")
+        self.channel = grpc.insecure_channel("grpc-service.hajimeteno-tonic-ns.svc.cluster.local:50051")
         self.stub = hello_pb2_grpc.VectorServiceStub(self.channel)
 
     @task

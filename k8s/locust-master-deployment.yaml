@@ -18,7 +18,7 @@ spec:
       - name: locust-master
         image: hajimeteno-locust:latest
         imagePullPolicy: Never
-        args: ["uv", "run", "locust", "-f", "src/main.py", "--master", "--host", "grpc-service.hajimeteno-locust-ns.svc.cluster.local:50051"]
+        args: ["uv", "run", "locust", "-f", "src/main.py", "--master", "--host", "grpc-service.hajimeteno-tonic-ns.svc.cluster.local:50051"]
         ports:
         - containerPort: 8089
         - containerPort: 5557

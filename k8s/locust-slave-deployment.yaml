@@ -18,10 +18,10 @@ spec:
       - name: locust-slave
         image: hajimeteno-locust:latest
         imagePullPolicy: Never
-        args: ["uv", "run", "locust", "-f", "src/main.py", "--worker", "--master-host=locust-master.hajimeteno-locust-ns.svc.cluster.local", "--host", "grpc-service.hajimeteno-locust-ns.svc.cluster.local:50051"]
+        args: ["uv", "run", "locust", "-f", "src/main.py", "--worker", "--master-host=locust-master.hajimeteno-locust-ns.svc.cluster.local", "--host", "grpc-service.hajimeteno-tonic-ns.svc.cluster.local:50051"]
         env:
         - name: GRPC_HOST
-          value: "grpc-service.hajimeteno-locust-ns.svc.cluster.local"
+          value: "grpc-service.hajimeteno-tonic-ns.svc.cluster.local"
         - name: GRPC_PORT
           value: "50051"
 
